@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-K Filing Financial Report Analysis</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2></h2><br><br>
+        <ul>
+            <li><a href="/introduction/">Introduction</a></li>
+            <li><a href="/analysis/">Analysis</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="sub-content">
+            <div class="sub-content-item">
+                <h3>Please choose your Summary LLM source:</h3>
+                <form method="post" action="/choose_summarization_source/">
+                    <select name="source" id="source" onchange="this.form.submit()">
+                        <option value="">{{ source }}</option>
+                        {% for item in sources %}
+                            <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="sub-content">
+            <div class="sub-content-item">
+                <h3>Please choose the Corporation A:</h3>
+                <form method="post" action="/update_selection_A/">
+                    <select name="optionA" id="optionA" onchange="this.form.submit()">
+                    <option value="">{{ optionA }}</option>
+                    {% for item in all_corps %}
+                        <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+                </form>
+            </div>
+            <div class="sub-content-item">
+                <h3>Please choose the Corporation B:</h3>
+                <form method="post" action="/update_selection_B/">
+                    <select name="optionB" id="optionB" onchange="this.form.submit()">
+                    <option value="">{{ optionB }}</option>
+                    {% for item in all_corps %}
+                        <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <h1>Overall Analysis:</h1>
+        <div class="sub-content">
+            <div class="sub-content-item">
+                <h2>Corporation A:</h2>
+                <p id="outputA">{{ outputA }}</p>
+            </div>
+        </div>
+        <div class="sub-content">
+            <div class="sub-content-item">
+                <h2>Corporation B:</h2>
+                <p id="outputB">{{ outputB }}</p>
+            </div>
+        </div>
+        <div class="sub-content">
+            <div class="sub-content-item">
+                <h2>Analyst Conclusion:</h2>
+                <form method="post" action="/comparison/">
+                    <button class="comparison-confirm" type="submit">Click to confirm</button>
+                </form>
+                <p id="Analyst">{{ comparison }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <h1>Perspective Analysis:</h1>
+        <div class="sub-content">
+            <div class="sub-content-item">
+                <h3>Please choose the Perspective:</h3>
+                <form method="post" action="/perspectives/">
+                    <select name="perspective" id="perspective" onchange="this.form.submit()">
+                    <option value="">{{ perspective }}</option>
+                    {% for item in all_perspectives %}
+                        <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+                </form>
+            </div>
+        </div>
+        <div class="sub-content">
+            <div  class="sub-content-item">
+                <h2>Corporation A:</h2>
+                <p id="PerspectiveA">{{ perspective_A }}</p>
+            </div>
+        </div>
+        <div class="sub-content">
+            <div class="sub-content-item">
+                <h2>Corporation B:</h2>
+                <p id="PerspectiveB">{{ perspective_B }}</p>
+            </div>
+        </div>
+        <div class="sub-content">
+            <div class="sub-content-item">
+                <h2>Comparison:</h2>
+                <p id="perspectiveComparison">{{ perspective_comparison }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="sub-content">
+            <div class="sub-content-item">
+                <h2 id="SimilarityOutput">Find the original source for the summary:</h2>
+                <form method="post" action="/handle_similarity/">
+                    <button class="original-sentence-confirm" type="submit">Click to submit the request</button>
+                </form><br>
+                <div>
+                    <h2>Original Sentence for Corporation A:</h2>
+                    <p id="similarity_output_A">{{ similarity_output_A}}</p>
+                </div><br>
+                <div>
+                    <h2>Original Sentence for Corporation B:</h2>
+                    <p id="similarity_output_B">{{ similarity_output_B }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
